@@ -6,18 +6,14 @@ WORKDIR /app
 
 # Set up environment variables
 ENV NEXT_PUBLIC_ACE_API_URL=https://biotechnique.pscace.com/gateway/v2
-ENV NODE_ENV=production
 
 # Copy package files and configuration files first
 COPY package*.json ./
-COPY next.config.mjs ./
-COPY tailwind.config.mjs ./
-COPY postcss.config.mjs ./
+COPY *.config.* ./
 COPY jsconfig.json ./
-COPY eslint.config.mjs ./
 
-# Install dependencies
-RUN npm install
+# Install ALL dependencies (including dev dependencies)
+RUN npm install --include=dev
 
 # Copy source code and public assets
 COPY src ./src
@@ -29,5 +25,6 @@ RUN npm run build
 # Expose port
 EXPOSE 3000
 
-# Start the application
+# Start the application with production environment
+ENV NODE_ENV=production
 CMD ["npm", "start"]
