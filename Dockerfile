@@ -14,7 +14,7 @@ COPY next.config.mjs ./
 COPY tailwind.config.mjs ./
 COPY postcss.config.mjs ./
 COPY jsconfig.json ./
-COPY .eslintrc.json ./
+COPY eslint.config.mjs ./
 
 # Install dependencies
 RUN npm install
